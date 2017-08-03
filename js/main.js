@@ -1,4 +1,4 @@
-var generar = document.getElementById('ejecutar');
+var generar = document.getElementById('mostrarT');
 var tablero = document.getElementById('tablero');
 
 function printMatrix (M){
@@ -113,6 +113,41 @@ function initMatrix (n) {
 generar.onclick = function () {
     tablero.innerHTML = '';
     var n = parseInt(document.getElementById('lados').value);
+     var M = initMatrix (n); // ponemos las variables necesarias
+/*
+    for( var i = 0; i < 1000; i++) {
+        var M = initMatrix (n);
+        var helper = gen_heuristic (n);
+        if (gen_solution (M, helper, n) ) {
+            printMatrix (M);
+            break;
+        }
+    }
+*/  
+    var tabla = document.createElement('table');
+    tabla.border = "1";
+    for (var i = 0; i < n; i++) {
+        var fila = document.createElement('tr');
+        for (var j = 0; j < n; j++) {
+            var celda = document.createElement('td');
+            if (i % 2 == 0 && j % 2 != 0 || i % 2 != 0 && j % 2 == 0) {
+                celda.setAttribute('class', 'negro');
+            }
+            var p = document.createElement('p');
+            p.innerHTML = M[i][j];
+            celda.appendChild(p);
+            
+            fila.appendChild(celda);
+        }
+        tabla.appendChild(fila);
+    }
+    tablero.appendChild(tabla);
+}
+ var sgtS =document.getElementById('sgtS');
+ sgtS.onclick = function() {
+ 
+    tablero.innerHTML = '';
+    var n = parseInt(document.getElementById('lados').value);
     
     for( var i = 0; i < 1000; i++) {
         var M = initMatrix (n);
@@ -141,4 +176,8 @@ generar.onclick = function () {
         tabla.appendChild(fila);
     }
     tablero.appendChild(tabla);
-}
+ }
+ var pasoP =document.getElementById("pasoP");
+ pasoP.onclick = function() {
+  alert("gui");
+ }
