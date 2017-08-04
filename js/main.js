@@ -1,6 +1,6 @@
 var generar = document.getElementById('mostrarT'); //llamo al boton mostrar
 var tablero = document.getElementById('tablero'); //llamo al div
-
+var cnt = 0;
 function printMatrix (M){
     console.log ("___________________");
     for (var i = 0; i < M.length; i++)
@@ -55,7 +55,7 @@ function use_helper (soluciones, helper) {
       var x = soluciones[i].x;
       var y = soluciones[i].y;      
       if ( helper[x][y] < min) {
-         min = helper[x][y] ;
+         min = helper[x][y] ; 
          pos = i;
       }
    }
@@ -67,7 +67,8 @@ function gen_solution (M, helper, n) {
     var mov_y = [-1, -2, -2, -1, +1, +2, +2, +1];    
     var step = 1;
     var x = 0; var y = 0;
-    
+     alert("sera");
+
     M[x][y] = step;
     while ( true ) {
         if ( step == n * n) {
@@ -91,6 +92,7 @@ function gen_solution (M, helper, n) {
         x =  soluciones[ idx ].x;
         y =  soluciones[ idx ].y;
         step++;
+
         M[x][y] = step;
        //console.log ("step: " + step);
 
@@ -109,10 +111,12 @@ function initMatrix (n) { // me retonna lista de 0 de nxn
         matrix[i] = fila;
     }
     return matrix;
+
 }
 
 generar.onclick = function () {
     tablero.innerHTML = '';
+
     var n = parseInt(document.getElementById('lados').value); //numero
      var M = initMatrix (n); // ponemos las variables necesarias
 /*
@@ -133,9 +137,11 @@ generar.onclick = function () {
             var celda = document.createElement('td');
             if (i % 2 == 0 && j % 2 != 0 || i % 2 != 0 && j % 2 == 0) {
                 celda.setAttribute('class', 'negro');
+
             }
             var p = document.createElement('p');
             p.innerHTML = M[i][j];
+
             celda.appendChild(p);
             
             fila.appendChild(celda);
@@ -145,6 +151,7 @@ generar.onclick = function () {
     tablero.appendChild(tabla);
 }
 
+         
  var sgtS =document.getElementById('sgtS');
  sgtS.onclick = function() {
  
@@ -154,7 +161,9 @@ generar.onclick = function () {
     for( var i = 0; i < 1000; i++) {
         var M = initMatrix (n);
         var helper = gen_heuristic (n);
+
         if (gen_solution (M, helper, n) ) {
+
             printMatrix (M);
             break;
         }
@@ -171,6 +180,7 @@ generar.onclick = function () {
             }
             var p = document.createElement('p');
             p.innerHTML = M[i][j];
+
             celda.appendChild(p);
             
             fila.appendChild(celda);
@@ -180,11 +190,28 @@ generar.onclick = function () {
     tablero.appendChild(tabla);
  }
 
-
  var pasoP =document.getElementById("pasoP");
  pasoP.onclick = function() {
-    var cont = 1;
-  var nuevo = [];
+    var tablero = document.getElementById("tablero");
+
+           cnt++;
+           // var celda = document.getElementsByTagName("td");
+           // var tablero = document.getElementById("tablero");
+           // for(var i=0; i <celda.length; i++){
+
+           //   var x = celda[i].textContent;
+              tablero.innerHTML = " " ;
+
+
+
+      
+
+         console.log(cnt);
+    
+/*
+     var M = initMatrix (n); // ponemos las variables necesarias
+
+    var nuevo = [];
      var n = parseInt(document.getElementById('lados').value);
       console.log(initMatrix (n));
        var celda =document.getElementsByTagName("td");
@@ -204,14 +231,14 @@ generar.onclick = function () {
         celda[i].innerHTML = " ";  
 
       } 
-      if(cont>2) {
-       celda[i].innerHTML = M[i][j];  
+      if(cnt>2) {
+       celda.innerHTML = M[i][j];  
 
 
       }
-     cont++;
   }  
 
+*/
   /*
 
   
