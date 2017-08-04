@@ -1,5 +1,5 @@
-var generar = document.getElementById('mostrarT');
-var tablero = document.getElementById('tablero');
+var generar = document.getElementById('mostrarT'); //llamo al boton mostrar
+var tablero = document.getElementById('tablero'); //llamo al div
 
 function printMatrix (M){
     console.log ("___________________");
@@ -75,6 +75,7 @@ function gen_solution (M, helper, n) {
             return true;
         }
         var soluciones = [];
+        console.log("sol: " + soluciones);
         for (var index = 0; index < mov_x.length; index++) {
             var i = x + mov_x[index];
             var j = y + mov_y[index];   
@@ -92,13 +93,13 @@ function gen_solution (M, helper, n) {
         step++;
         M[x][y] = step;
        //console.log ("step: " + step);
-       
+
     }
     return false;
 } 
 
 
-function initMatrix (n) {
+function initMatrix (n) { // me retonna lista de 0 de nxn
     var matrix = [];
     for (var i = 0; i < n; i++) {
         var fila = [];
@@ -112,7 +113,7 @@ function initMatrix (n) {
 
 generar.onclick = function () {
     tablero.innerHTML = '';
-    var n = parseInt(document.getElementById('lados').value);
+    var n = parseInt(document.getElementById('lados').value); //numero
      var M = initMatrix (n); // ponemos las variables necesarias
 /*
     for( var i = 0; i < 1000; i++) {
@@ -143,6 +144,7 @@ generar.onclick = function () {
     }
     tablero.appendChild(tabla);
 }
+
  var sgtS =document.getElementById('sgtS');
  sgtS.onclick = function() {
  
@@ -177,7 +179,42 @@ generar.onclick = function () {
     }
     tablero.appendChild(tabla);
  }
+
+
  var pasoP =document.getElementById("pasoP");
  pasoP.onclick = function() {
-  alert("gui");
+  var nuevo = [];
+     var n = parseInt(document.getElementById('lados').value);
+      console.log(initMatrix (n));
+       var celda =document.getElementsByTagName("td");
+      var tabla = document.createElement('table');
+  
+  for(var i = 0; i <celda.length; i++) {
+        var x = celda[i].textContent;
+         nuevo.push(x);
+         nuevo.sort(function(a,b) {return a-b});
+    // var n =  nuevo.split(',').map(Number);
+        console.log(nuevo);
+        for(var z =0; z <= n*n; z++) {
+          if(x[i] == z[i]) {
+        console.log(x);
+
+            }
+
+      } 
+     
+  }  
+
+  /*
+
+  
+   var M = initMatrix (n); // ponemos las variables necesarias
+
+  if(tabla = [0]) {
+    console.log(M);
+  }
+
+    printMatrix(M);
+    console.log(soluciones)
+ */
  }
