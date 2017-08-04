@@ -183,6 +183,7 @@ generar.onclick = function () {
 
  var pasoP =document.getElementById("pasoP");
  pasoP.onclick = function() {
+    var cont = 1;
   var nuevo = [];
      var n = parseInt(document.getElementById('lados').value);
       console.log(initMatrix (n));
@@ -200,9 +201,15 @@ generar.onclick = function () {
         console.log(x);
 
             }
+        celda[i].innerHTML = " ";  
 
       } 
-     
+      if(cont>2) {
+       celda[i].innerHTML = M[i][j];  
+
+
+      }
+     cont++;
   }  
 
   /*
