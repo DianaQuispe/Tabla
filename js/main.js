@@ -138,7 +138,7 @@ function tablita() {
               celda.setAttribute('class', 'blanco');
             }
             var p = document.createElement('p');
-            p.innerHTML = M[i][j];
+            p.innerHTML = M[i][j] ;
             celda.appendChild(p);
             puzzle.push(celda);
             fila.appendChild(celda);
@@ -163,6 +163,7 @@ mostrarT.onclick = function () {
         }else  {
           celda.setAttribute('class', 'blanco');
         }
+        celda.innerHTML =  "♞" ;
         fila.appendChild(celda);
         }
         tabla.appendChild(fila);
@@ -181,13 +182,14 @@ pasoP.onclick = function () {
   puzzle=puzzle.sort(function(a, b){ return a.textContent-b.textContent}); 
   for(var i= 0;  i<=puzzle.length; i++) {
     if(cont < n*n) {
-    puzzle[cont].setAttribute('class','yellow');
-    }else {
+    puzzle[cont].setAttribute('class','blue');
+      }else {
       if (i % 2 == 0 ) {
           celda[i].setAttribute('class', 'negro');
         }else  {
           celda[i].setAttribute('class', 'blanco');
         }
+
     cont = 0;
     }
   }
