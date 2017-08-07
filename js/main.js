@@ -1,6 +1,9 @@
-var generar = document.getElementById('mostrarT'); //llamo al boton mostrar
-var tablero = document.getElementById('tablero'); //llamo al div
-var cnt = 0;
+var mostrarT = document.getElementById('mostrarT');
+var tablero = document.getElementById('tablero');
+var pasoP = document.getElementById('pasoP');
+var sgtS = document.getElementById("sgtS");
+var puzzle= [];
+var cont=0;
 function printMatrix (M){
     console.log ("___________________");
     for (var i = 0; i < M.length; i++)
@@ -55,7 +58,7 @@ function use_helper (soluciones, helper) {
       var x = soluciones[i].x;
       var y = soluciones[i].y;      
       if ( helper[x][y] < min) {
-         min = helper[x][y] ; 
+         min = helper[x][y] ;
          pos = i;
       }
    }
@@ -67,8 +70,7 @@ function gen_solution (M, helper, n) {
     var mov_y = [-1, -2, -2, -1, +1, +2, +2, +1];    
     var step = 1;
     var x = 0; var y = 0;
-     alert("sera");
-
+    
     M[x][y] = step;
     while ( true ) {
         if ( step == n * n) {
@@ -76,7 +78,6 @@ function gen_solution (M, helper, n) {
             return true;
         }
         var soluciones = [];
-        console.log("sol: " + soluciones);
         for (var index = 0; index < mov_x.length; index++) {
             var i = x + mov_x[index];
             var j = y + mov_y[index];   
@@ -92,16 +93,15 @@ function gen_solution (M, helper, n) {
         x =  soluciones[ idx ].x;
         y =  soluciones[ idx ].y;
         step++;
-
         M[x][y] = step;
        //console.log ("step: " + step);
-
+       
     }
     return false;
 } 
 
 
-function initMatrix (n) { // me retonna lista de 0 de nxn
+function initMatrix (n) {
     var matrix = [];
     for (var i = 0; i < n; i++) {
         var fila = [];
@@ -111,144 +111,85 @@ function initMatrix (n) { // me retonna lista de 0 de nxn
         matrix[i] = fila;
     }
     return matrix;
-
 }
 
-generar.onclick = function () {
-    tablero.innerHTML = '';
-
-    var n = parseInt(document.getElementById('lados').value); //numero
-     var M = initMatrix (n); // ponemos las variables necesarias
-/*
+function tablita() { 
+  tablero.innerHTML = '';
+  var n = parseInt(document.getElementById('lados').value);  
     for( var i = 0; i < 1000; i++) {
-        var M = initMatrix (n);
-        var helper = gen_heuristic (n);
-        if (gen_solution (M, helper, n) ) {
-            printMatrix (M);
-            break;
-        }
-    }
-*/  
-    var tabla = document.createElement('table');
-    tabla.border = "1";
-    for (var i = 0; i < n; i++) {
-        var fila = document.createElement('tr');
-        for (var j = 0; j < n; j++) {
-            var celda = document.createElement('td');
-            if (i % 2 == 0 && j % 2 != 0 || i % 2 != 0 && j % 2 == 0) {
-                celda.setAttribute('class', 'negro');
-
-            }
-            var p = document.createElement('p');
-            p.innerHTML = M[i][j];
-
-            celda.appendChild(p);
-            
-            fila.appendChild(celda);
-        }
-        tabla.appendChild(fila);
-    }
-    tablero.appendChild(tabla);
-}
-
-         
- var sgtS =document.getElementById('sgtS');
- sgtS.onclick = function() {
- 
-    tablero.innerHTML = '';
-    var n = parseInt(document.getElementById('lados').value);
-    
-    for( var i = 0; i < 1000; i++) {
-        var M = initMatrix (n);
-        var helper = gen_heuristic (n);
-
-        if (gen_solution (M, helper, n) ) {
-
-            printMatrix (M);
-            break;
-        }
-    }
-    
-    var tabla = document.createElement('table');
-    tabla.border = "1";
-    for (var i = 0; i < n; i++) {
-        var fila = document.createElement('tr');
-        for (var j = 0; j < n; j++) {
-            var celda = document.createElement('td');
-            if (i % 2 == 0 && j % 2 != 0 || i % 2 != 0 && j % 2 == 0) {
-                celda.setAttribute('class', 'negro');
-            }
-            var p = document.createElement('p');
-            p.innerHTML = M[i][j];
-
-            celda.appendChild(p);
-            
-            fila.appendChild(celda);
-        }
-        tabla.appendChild(fila);
-    }
-    tablero.appendChild(tabla);
- }
-
- var pasoP =document.getElementById("pasoP");
- pasoP.onclick = function() {
-    var tablero = document.getElementById("tablero");
-
-           cnt++;
-           // var celda = document.getElementsByTagName("td");
-           // var tablero = document.getElementById("tablero");
-           // for(var i=0; i <celda.length; i++){
-
-           //   var x = celda[i].textContent;
-              tablero.innerHTML = " " ;
-
-
-
-      
-
-         console.log(cnt);
-    
-/*
-     var M = initMatrix (n); // ponemos las variables necesarias
-
-    var nuevo = [];
-     var n = parseInt(document.getElementById('lados').value);
-      console.log(initMatrix (n));
-       var celda =document.getElementsByTagName("td");
-      var tabla = document.createElement('table');
-  
-  for(var i = 0; i <celda.length; i++) {
-        var x = celda[i].textContent;
-         nuevo.push(x);
-         nuevo.sort(function(a,b) {return a-b});
-    // var n =  nuevo.split(',').map(Number);
-        console.log(nuevo);
-        for(var z =0; z <= n*n; z++) {
-          if(x[i] == z[i]) {
-        console.log(x);
-
-            }
-        celda[i].innerHTML = " ";  
-
-      } 
-      if(cnt>2) {
-       celda.innerHTML = M[i][j];  
-
-
+      var M = initMatrix (n);
+      var helper = gen_heuristic (n);
+      if (gen_solution (M, helper, n) ) {
+        printMatrix (M);
+        break;
       }
-  }  
+    }
+    var n = parseInt(document.getElementById('lados').value);
+    var tabla = document.createElement('table');
+    tabla.setAttribute("id", "tabla");
+    tabla.border = "1";
+      for (var i = 0; i < n; i++) {
+        var fila = document.createElement('tr');
+        for (var j = 0; j < n; j++) {
+          var celda = document.createElement('td');
+            if (i % 2 == 0 && j % 2 != 0 || i % 2 != 0 && j % 2 == 0) {
+              celda.setAttribute('class', 'negro');
+            }else  {
+              celda.setAttribute('class', 'blanco');
+            }
+            var p = document.createElement('p');
+            p.innerHTML = M[i][j];
+            celda.appendChild(p);
+            puzzle.push(celda);
+            fila.appendChild(celda);
+        }
+        tabla.appendChild(fila);
+    }
+    console.log(puzzle);
+    tablero.appendChild(tabla);
+}
 
-*/
-  /*
+mostrarT.onclick = function () {
+  var n = parseInt(document.getElementById('lados').value);
+  var tabla = document.createElement('table');
+  tabla.setAttribute("id", "tabla");
+  tabla.border = "1";
+    for (var i = 0; i < n; i++) {
+      var fila = document.createElement('tr');
+      for (var j = 0; j < n; j++) {
+        var celda = document.createElement('td');
+        if (i % 2 == 0 && j % 2 != 0 || i % 2 != 0 && j % 2 == 0) {
+          celda.setAttribute('class', 'negro');
+        }else  {
+          celda.setAttribute('class', 'blanco');
+        }
+        fila.appendChild(celda);
+        }
+        tabla.appendChild(fila);
+      }
+      console.log(puzzle);
+      tablero.appendChild(tabla);
+}
 
-  
-   var M = initMatrix (n); // ponemos las variables necesarias
+sgtS.onclick = function() {
+  tablita() 
+}
 
-  if(tabla = [0]) {
-    console.log(M);
+pasoP.onclick = function () {
+  var celda = document.getElementsByTagName('td');
+  var n = parseInt(document.getElementById('lados').value);
+  puzzle=puzzle.sort(function(a, b){ return a.textContent-b.textContent}); 
+  for(var i= 0;  i<=puzzle.length; i++) {
+    if(cont < n*n) {
+    puzzle[cont].setAttribute('class','yellow');
+    }else {
+      if (i % 2 == 0 ) {
+          celda[i].setAttribute('class', 'negro');
+        }else  {
+          celda[i].setAttribute('class', 'blanco');
+        }
+    cont = 0;
+    }
   }
-
-    printMatrix(M);
-    console.log(soluciones)
- */
- }
+cont++;
+}
