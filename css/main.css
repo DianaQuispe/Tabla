@@ -2,24 +2,46 @@
 
 * {
 	font-family: 'Poiret One', cursive;
-
+}
+body {
+  background-image: url(../imagenes/nasa.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+.tablita {
+  padding: 10px;
 }
 .negro{
   background-color: black;
   color:white;
 }
-
-td{
-  width: 35px;
-  height: 35px;
+.blanco {
+	background-color: white;
+	color:black;
 }
 
+.blue{
+  background-color: rgba(183, 248, 255, 0.48);
+  color:black;
+}
+
+td{
+  padding: 10px;
+
+  width: 50px;
+  height: 65px;
+  text-align: center;
+}
+
+
  button{
-        font-size:10px;
-        font-family:Verdana,Helvetica;
-        font-weight:bold;
-        color:white;
-        background:#638cb5;
-        border:0px;
-        height:19px;
+
+   font-size:19px;
+    font-family: 'Poiret One';  
+    color:white;
+   background:#638cb5; 
+   border:0px;
+   height:25px;
+
 }
